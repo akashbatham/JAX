@@ -12,12 +12,11 @@ class AccessRequested:
         self.ut = Utility
 
     def accesstext(self):
-        obj = self.ut.expwaitvisible(self.Text_AccessRequested_Xpath)
+        obj = self.ut.expwaitvisible(self,self.Text_AccessRequested_Xpath)
         if (obj.text == "Access Requested"):
             print("acctext")
         else:
             print("Failed to give access")
 
     def backtologin(self):
-        obj = self.ut.expwaitvisible(self.Button_SignIn_Xpath)
-        obj.click()
+        self.ut.expwaitclickable(self,self.Button_SignIn_Xpath)

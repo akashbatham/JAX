@@ -22,7 +22,8 @@ class ReadConfig:
 
     @staticmethod
     def unregisteredemail():
-        unemail = config.get
+        unemail = config.get('common info', 'unremail')
+        return unemail
 
     @staticmethod
     def names():

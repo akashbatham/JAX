@@ -1,5 +1,6 @@
 import pytest
 
+from PageObjects.ForgotPassword import ForgotPassword
 from PageObjects.Login import LoginClass
 from PageObjects.RequestAccess import RequestAccess
 from Utilities.readProperties import ReadConfig
@@ -15,6 +16,7 @@ class TestCases:
         self.driver = setup
         self.url = ReadConfig.getURL()
         self.email = ReadConfig.emails()
+        self.unremail = ReadConfig.unregisteredemail()
         self.name = ReadConfig.names()
         self.company = ReadConfig.companies()
         self.password = ReadConfig.passwords()
@@ -22,6 +24,7 @@ class TestCases:
         self.ut = Utility(self.driver)
         self.ra = RequestAccess(self.driver)
         self.rac = AccessRequested(self.driver)
+        self.fp = ForgotPassword(self.driver)
 
     @pytest.mark.happypath
     def test_logincustomer(self):
@@ -30,7 +33,7 @@ class TestCases:
         self.lo.sendpswrd(self.password)
         self.lo.signinclick()
 
-    @pytest.mark.happypatherror
+    @pytest.mark.happypath
     def test_rqstaccesserror(self):
         self.driver.get(self.url)
         self.lo.requestclick()
@@ -38,18 +41,30 @@ class TestCases:
         self.ra.inputname(self.name)
         self.ra.inputcompany(self.company)
         self.ra.submitclick()
-        self.ra.confirmtxt()
+        self.ra.emailexisttxt()
 
     @pytest.mark.happypath
     def test_rqstaccesssuccess(self):
         self.driver.get(self.url)
         self.lo.requestclick()
-        self.ra.inputemail(self.email)
+        self.ra.inputemail(self.unremail)
         self.ra.inputname(self.name)
         self.ra.inputcompany(self.company)
         self.ra.submitclick()
         self.rac.accesstext()
 
-    @pytest.mark.happypath
+    @pytest.mark.happypatherror
     def test_frgtpswrd(self):
-        pass
+        self.driver.get(self.url)
+        self.lo.forgotpwdclick()
+        self.fp.enteremail(self.email)
+        self.fp.sendbuttonclick()
+        self.fp.errorunremail()
+
+    @pytest.mark.regression
+    def test_frgtpswrd(self):
+        self.driver.get(self.url)
+        self.lo.forgotpwdclick()
+        self.fp.enteremail(self.email)
+        self.fp.sendbuttonclick()
+        self.fp.successfulmessage()

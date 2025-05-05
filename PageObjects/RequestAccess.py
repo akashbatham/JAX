@@ -39,10 +39,9 @@ class RequestAccess:
         obj.send_keys(company)
 
     def submitclick(self):
-        obj = self.ut.expwaitvisible(self,self.Button_RqstAcs_Xpath)
-        obj.click()
+        self.ut.expwaitclickable(self,self.Button_RqstAcs_Xpath)
 
-    def confirmtxt(self):
+    def emailexisttxt(self):
         obj = self.ut.expwaitvisible(self,self.TextWar_AlreadyExistEmail_Xpath)
         if (obj.text == "Access Request with this email already exists."):
             print(obj.text)
