@@ -11,6 +11,9 @@ class AdminDash:
         self.ut = ut
 
     #buttons
+    Button_HideMenu_Xpath = (By.XPATH,'//*[name()="mat-icon" and @data-mat-icon-name="bars-3"]')
+    Button_SignoutMenu_Xpath = (By.XPATH,'//span[@class="mdc-button__label"]')
+    Button_SignoutMenuOption_Xpath = (By.XPATH,'////button[@role="menuitem"]')
     Button_Calendar_Xpath = (By.XPATH,'//mat-icon[@role="img" and @svgicon="heroicons_solid:calendar-days"]')
     Button_YearSelect_Xpath = (By.XPATH,'//button[@aria-describedby="mat-calendar-period-label-5"]/span[@class="mdc-button__label"]')
     Button_PrevMonth_Xpath = (By.XPATH,'//button[@aria-label="Previous month"]//*[name()="svg"]')
@@ -20,6 +23,13 @@ class AdminDash:
     Dropdown_Companies_Xpath = (By.XPATH,'//div[@id="mat-select-value-0"]')
     List_Companies_Xpath = (By.XPATH,'//div[@role="listbox"]/mat-option/span')
     Check_Companies_Xpath = (By.XPATH,'//div[@role="listbox"]/mat-option/mat-pseudo-checkbox') #check the property state="checked"
+    List_ComponentType_Xpath = (By.XPATH,'//div[text()="Component Type"]/following-sibling::*[name()="app-dashboard-donut-chart"]/div/div/div/div/span[contains(@class,"text")]')
+    List_ComponentTypeCount_Xpath = (By.XPATH,'//div[text()="Component Type"]/following-sibling::*[name()="app-dashboard-donut-chart"]/div/div/div/span[not(contains(@class,"jax-dark-grey"))]') #You can use the webelement of component name and use that to find the count and percentage using parent-sibling bond
+    Single_ComponentTypeCount_Xpath = (By.XPATH, 'webelement of single component and parent then sibling to find xpath')
+    List_ComponentTypePercent_Xpath = (By.XPATH,'//div[text()="Component Type"]/following-sibling::*[name()="app-dashboard-donut-chart"]/div/div/div/span[contains(@class,"jax-dark-grey")]')
+    List_PerformanceRatio_Xpath = (By.XPATH,'//div[text()="Performance Ratio"]/following-sibling::*[name()="app-dashboard-donut-chart"]/div/div/div/div/span[contains(@class,"text")]')
+    List_PerformanceRatioCount_Xpath = (By.XPATH,'//div[text()="Performance Ratio"]/following-sibling::*[name()="app-dashboard-donut-chart"]/div/div/div/span[not(contains(@class,"jax-dark-grey"))]')
+    List_PerformanceRatioPercent_Xpath = (By.XPATH,'//div[text()="Performance Ratio"]/following-sibling::*[name()="app-dashboard-donut-chart"]/div/div/div/span[contains(@class,"jax-dark-grey")]')
 
     #text
     Text_MonthInCalender_Xpath = (By.XPATH,'//tr[@class="ng-star-inserted"]/td[@role=not("gridcell")]')
@@ -33,6 +43,7 @@ class AdminDash:
     Text_UsersText_Xpath = (By.XPATH,'//div[text()="Active Users"]')
     Text_CountTests_Xpath = (By.XPATH,'//div[text()="Total Tests"]/preceding-sibling::div')
     Text_CountTests_Xpath = (By.XPATH, '//div[text()="Total Tests"]')
+
 
 
     #Graph
@@ -50,3 +61,4 @@ class AdminDash:
     Pie_TooltipValueMid_Xpath = (By.XPATH,'//div[@class="apexcharts-tooltip-series-group apexcharts-tooltip-series-group-1 apexcharts-active"]/div[@class="apexcharts-tooltip-text"]/div[@class="apexcharts-tooltip-y-group"]/span[@class="apexcharts-tooltip-text-y-value"]')
     Pie_TooltipLabelCritical_Xpath = (By.XPATH,'//div[@class="apexcharts-tooltip-series-group apexcharts-tooltip-series-group-2 apexcharts-active"]/div[@class="apexcharts-tooltip-text"]/div[@class="apexcharts-tooltip-y-group"]/span[@class="apexcharts-tooltip-text-y-label"]')
     Pie_TooltipValueCritical_Xpath = (By.XPATH,'//div[@class="apexcharts-tooltip-series-group apexcharts-tooltip-series-group-2 apexcharts-active"]/div[@class="apexcharts-tooltip-text"]/div[@class="apexcharts-tooltip-y-group"]/span[@class="apexcharts-tooltip-text-y-value"]')
+
