@@ -1,0 +1,17 @@
+Customized Marker
+
+@pytest.mark.regression
+def test_regression():
+
+def test_reg2():
+
+def test_reg3():
+
+This can be run using Console using "pytest -m regression"
+This will run the test case with regression in pytest
+
+If you want to run the test cases that are not under regression can be run using
+"pytest -m 'not regression'"
+
+
+Inbuilt Marker
