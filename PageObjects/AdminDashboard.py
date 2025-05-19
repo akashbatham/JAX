@@ -75,17 +75,33 @@ class AdminDash:
         for company in companiesoptions:
             company.click()
             company_name = company.text
-            # self.countevry()
-            criticalcount = ut.expwaitvisible(self, self.Text_CountCritical_Xpath).text
-            midcount = ut.expwaitvisible(self, self.Text_CountMid_Xpath).text
-            lowcount = ut.expwaitvisible(self, self.Text_CountLow_Xpath).text
+            criticalcount,midcount,lowcount = self.countevry()
             company_name = [criticalcount,midcount,lowcount]
             self.companyselect()
             companylistcount.append(company_name)
-        print(companylistcount)
+        print("This is the list count: ", companylistcount)
+        return companylistcount
+
 
 
     def countevry(self):
         criticalcount = ut.expwaitvisible(self,self.Text_CountCritical_Xpath).text
         midcount = ut.expwaitvisible(self,self.Text_CountMid_Xpath).text
         lowcount = ut.expwaitvisible(self,self.Text_CountLow_Xpath).text
+        return criticalcount, midcount, lowcount
+
+    def sumofcount(self):
+        company_count = self.companylist()
+        critical_sum = 0
+        mid_sum = 0
+        low_sum = 0
+        for i in range (1,len(company_count)):
+            critical_sum += int(company_count[i][0])
+            mid_sum += int(company_count[i][1])
+            low_sum += int(company_count[i][2])
+        if critical_sum == int(company_count[0][0]):
+            print("Sum Matches for critical")
+        if mid_sum == int(company_count[0][1]):
+            print("Sum Matches for mid")
+        if low_sum == int(company_count[0][2]):
+            print("Sum Matches for low")

@@ -85,3 +85,4 @@ class TestCases:
         self.test_adminlogin()
         self.ad.companyselect()
         self.ad.companylist()
+        self.ad.sumofcount()
