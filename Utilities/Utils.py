@@ -19,3 +19,8 @@ class Utility:
         wait = WebDriverWait(self.driver,10)
         eleme = wait.until(es.visibility_of_element_located(element))
         return eleme
+
+    def waitafterclick(self,element):
+        wait = WebDriverWait(self.driver,5,2,ignored_exceptions=None)
+        eleme = wait.until(es.presence_of_all_elements_located(element))
+        return eleme

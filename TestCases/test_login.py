@@ -1,5 +1,6 @@
 import pytest
 
+from PageObjects.AdminDashboard import AdminDash
 from PageObjects.ForgotPassword import ForgotPassword
 from PageObjects.Login import LoginClass
 from PageObjects.RequestAccess import RequestAccess
@@ -16,6 +17,8 @@ class TestCases:
         self.driver = setup
         self.url = ReadConfig.getURL()
         self.email = ReadConfig.emails()
+        self.ademail = ReadConfig.adminemail()
+        self.adpass = ReadConfig.adpassword()
         self.unremail = ReadConfig.unregisteredemail()
         self.name = ReadConfig.names()
         self.company = ReadConfig.companies()
@@ -25,12 +28,20 @@ class TestCases:
         self.ra = RequestAccess(self.driver)
         self.rac = AccessRequested(self.driver)
         self.fp = ForgotPassword(self.driver)
+        self.ad = AdminDash(self.driver)
 
     @pytest.mark.happypath
     def test_logincustomer(self):
         self.driver.get(self.url)
         self.lo.sendemail(self.email)
         self.lo.sendpswrd(self.password)
+        self.lo.signinclick()
+
+    @pytest.mark.happypath
+    def test_adminlogin(self):
+        self.driver.get(self.url)
+        self.lo.sendemail(self.ademail)
+        self.lo.sendpswrd(self.adpass)
         self.lo.signinclick()
 
     @pytest.mark.happypath
@@ -68,3 +79,9 @@ class TestCases:
         self.fp.enteremail(self.email)
         self.fp.sendbuttonclick()
         self.fp.successfulmessage()
+
+    @pytest.mark.admin
+    def test_dashcompanychange(self):
+        self.test_adminlogin()
+        self.ad.companyselect()
+        self.ad.companylist()

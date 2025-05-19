@@ -16,6 +16,16 @@ class ReadConfig:
         return email
 
     @staticmethod
+    def adminemail():
+        ademails = config.get('common info','adminemail')
+        return ademails
+
+    @staticmethod
+    def adpassword():
+        adpass = config.get('common info','adminpass')
+        return adpass
+
+    @staticmethod
     def passwords():
         password = config.get('common info', 'password')
         return password
