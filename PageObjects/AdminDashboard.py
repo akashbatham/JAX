@@ -70,13 +70,22 @@ class AdminDash:
         wait = WebDriverWait(self.driver, 30)
         expected_count = 2
         wait.until(lambda driver: len(self.driver.find_elements(By.XPATH, '//div[@role="listbox"]/mat-option/span')) >= expected_count)
-        options = self.driver.find_elements(By.XPATH, '//div[@role="listbox"]/mat-option/span')
-        for option in options:
-            print("The count for :", option.text)
-            # option.click()
+        companiesoptions = self.driver.find_elements(By.XPATH, '//div[@role="listbox"]/mat-option/span')
+        companylistcount = []
+        for company in companiesoptions:
+            company.click()
+            company_name = company.text
             # self.countevry()
+            criticalcount = ut.expwaitvisible(self, self.Text_CountCritical_Xpath).text
+            midcount = ut.expwaitvisible(self, self.Text_CountMid_Xpath).text
+            lowcount = ut.expwaitvisible(self, self.Text_CountLow_Xpath).text
+            company_name = [criticalcount,midcount,lowcount]
+            self.companyselect()
+            companylistcount.append(company_name)
+        print(companylistcount)
+
 
     def countevry(self):
-        criticalcount = ut.expwaitvisible(self,self.Text_CountCritical_Xpath)
-        midcount = ut.expwaitvisible(self,self.Text_CountMid_Xpath)
-        lowcount = ut.expwaitvisible(self,self.Text_CountLow_Xpath)
+        criticalcount = ut.expwaitvisible(self,self.Text_CountCritical_Xpath).text
+        midcount = ut.expwaitvisible(self,self.Text_CountMid_Xpath).text
+        lowcount = ut.expwaitvisible(self,self.Text_CountLow_Xpath).text
