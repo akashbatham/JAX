@@ -69,20 +69,27 @@ class AdminDash:
     def companylist(self):
         wait = WebDriverWait(self.driver, 30)
         expected_count = 2
+        #waiting for the list to load fully
         wait.until(lambda driver: len(self.driver.find_elements(By.XPATH, '//div[@role="listbox"]/mat-option/span')) >= expected_count)
+        #creating a list of the webelements
         companiesoptions = self.driver.find_elements(By.XPATH, '//div[@role="listbox"]/mat-option/span')
         companylistcount = []
+        i = 0
         for company in companiesoptions:
+            i = i+1
+            #Clicks on the company to select
             company.click()
             company_name = company.text
+            #Gets the values from the method and assigns the values
             criticalcount,midcount,lowcount = self.countevry()
+            #Creates a list of the elements received from method
             company_name = [criticalcount,midcount,lowcount]
-            self.companyselect()
+            #IF condition to stop the dropdown from getting opem after the last company is selected
+            if i < len(companiesoptions):
+                self.companyselect()
             companylistcount.append(company_name)
         print("This is the list count: ", companylistcount)
         return companylistcount
-
-
 
     def countevry(self):
         criticalcount = ut.expwaitvisible(self,self.Text_CountCritical_Xpath).text

@@ -84,5 +84,4 @@ class TestCases:
     def test_dashcompanychange(self):
         self.test_adminlogin()
         self.ad.companyselect()
-        self.ad.companylist()
         self.ad.sumofcount()
